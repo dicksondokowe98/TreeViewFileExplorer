@@ -1,0 +1,47 @@
+﻿<Window x:Class="TreeViewFileExplorer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TreeViewFileExplorer"
+        xmlns:classes="clr-namespace:TreeViewFileExplorer.ShellClasses"
+        mc:Ignorable="d"
+        Title="Import GPC/SEC Sample Files " Height="468.5" Width="799">
+    <Grid Margin="32,31,2,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="263*"/>
+            <RowDefinition Height="119*"/>
+        </Grid.RowDefinitions>
+
+        <TreeView SelectedItemChanged="SelectionChanged" Name="treeView" Margin="-9,-11,415,97" Grid.RowSpan="2">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                    <Setter Property="KeyboardNavigation.AcceptsReturn" Value="True" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type classes:FileSystemObjectInfo}" ItemsSource="{Binding Path=Children}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=ImageSource, UpdateSourceTrigger=PropertyChanged}" Margin="0,1,8,1"></Image>
+                        <TextBlock Text="{Binding Path=FileSystemInfo.Name}"></TextBlock>
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+        <Label Content="Batch Name:" HorizontalAlignment="Left" Height="26" Margin="-11,59,0,0" VerticalAlignment="Top" Width="81" Grid.Row="1" RenderTransformOrigin="0.486,0.222"/>
+
+        <Label Content="File Name(s):" HorizontalAlignment="Left" Height="25" Margin="-11,34,0,0" VerticalAlignment="Top" Width="86" Grid.Row="1"/>
+        <Button Content="Import" HorizontalAlignment="Left" Height="25" Margin="572,91,0,0" VerticalAlignment="Top" Width="70" Grid.Row="1" RenderTransformOrigin="0.986,0.64" Click="Button_Click"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Height="25" Margin="660,91,0,0" VerticalAlignment="Top" Width="71" Grid.Row="1" Click="Button_Click_1"/>
+        <ListBox Name="fileList"
+                 SelectionChanged="FileListSelectionChanged"
+                 HorizontalAlignment="Left" Height="316" Margin="347,-11,0,0" VerticalAlignment="Top" Width="386" Grid.RowSpan="2" SelectionMode="Extended"/>
+        <ComboBox Name="FileNameComboBox"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="656" Margin="75,37,0,0" Grid.Row="1" IsReadOnly="True" IsEditable="True" />
+        <ComboBox x:Name="BatchName"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="656" Margin="75,64,0,0" Grid.Row="1"  />
+
+
+    </Grid>
+
+
+</Window>
