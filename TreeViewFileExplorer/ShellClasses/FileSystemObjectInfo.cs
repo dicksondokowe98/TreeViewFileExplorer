@@ -209,7 +209,7 @@ namespace TreeViewFileExplorer.ShellClasses
                     if ((file.Attributes & FileAttributes.System) != FileAttributes.System)
                     {
                         var folder = new FileSystemObjectInfo(file);
-                        if (folder is DirectoryInfo || file.Extension == ".workspace")
+                        if (folder is DirectoryInfo)
                         Children.Add(folder);
                     }
                 }
